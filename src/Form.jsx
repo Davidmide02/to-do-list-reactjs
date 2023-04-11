@@ -56,7 +56,7 @@ function Form({ input, setInput, todo, setTodo, edit, setEdit }) {
             autoFocus
           />
 
-          <button type="submit">{edit ? "Save" : "Add"}</button>
+          <button type="submit"> {edit ? "Save" : "Add"}</button>
         </form>
       </div>
     </>
