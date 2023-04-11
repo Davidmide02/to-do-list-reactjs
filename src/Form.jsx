@@ -4,50 +4,63 @@ import React from "react";
 // import { uuid as id } from "react-uuid";
 import uuid from "react-uuid";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
+function Form({ input, setInput, todo, setTodo, edit, setEdit }) {
+  // const [input, setInput] = useState("");
 
+  const updateTodo = (title, id, completed) => {
+    const newTodo = todo.map((task) =>
+      task.id === id ? { title, id, completed } : task
+    );
+    setTodo(newTodo);
+    setEdit("");
+  };
 
-function Form({ input, setInput, todo, setTodo }) {
-
-    // const [input, setInput] = useState("");
-
-    function handleSubmit(e) {
-
-        e.preventDefault();
-        setTodo([...todo, { id: uuid(), title: input, completed: false }])
-        setInput("");
-
+  useEffect(() => {
+    if (edit) {
+      setInput(edit.title);
+    } else {
+      setInput("");
     }
+  }, [setInput, edit]);
 
-    const handleOnchange = (e) => {
-        setInput(e.target.value);
-        console.log(input);
-        // setInput("");
+  function handleSubmit(e) {
+    e.preventDefault();
 
+    if (!edit) {
+      setTodo([...todo, { id: uuid(), title: input, completed: false }]);
+      setInput("");
+
+      console.log("when edit null");
+    } else {
+      console.log("when edit has value");
+      updateTodo(input, edit.id, edit.completed);
     }
+  }
 
-    return (
-        <>
-            <div className="form">
+  const handleOnchange = (e) => {
+    setInput(e.target.value);
+    // setInput("");
+  };
 
-                <form onSubmit={handleSubmit}  >
-                    <input type="text"
-                        value={input}
-                        onChange={handleOnchange}
-                        placeholder="Input task..."
-                    />
+  return (
+    <>
+      <div className="form">
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={input}
+            onChange={handleOnchange}
+            placeholder="Input task..."
+            autoFocus
+          />
 
-                    <button type="submit">Add</button>
-
-
-                </form>
-
-                <p>{input}</p>
-            </div>
-        </>
-    )
-
+          <button type="submit">{edit ? "Save" : "Add"}</button>
+        </form>
+      </div>
+    </>
+  );
 }
 
 export default Form;
