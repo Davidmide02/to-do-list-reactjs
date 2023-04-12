@@ -1,12 +1,18 @@
 import React from "react";
-
-// import { v4 as uuidv4 } from "uuid";
-// import { uuid as id } from "react-uuid";
 import uuid from "react-uuid";
 
 import { useState, useEffect } from "react";
 
-function Form({ input, setInput, todo, setTodo, edit, setEdit }) {
+function Form({
+  input,
+  setInput,
+  todo,
+  setTodo,
+  edit,
+  setEdit,
+  setCount,
+  count,
+}) {
   // const [input, setInput] = useState("");
 
   const updateTodo = (title, id, completed) => {
@@ -28,20 +34,22 @@ function Form({ input, setInput, todo, setTodo, edit, setEdit }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!edit) {
-      setTodo([...todo, { id: uuid(), title: input, completed: false }]);
-      setInput("");
-
-      console.log("when edit null");
+    if (input) {
+      if (!edit) {
+        setTodo([...todo, { id: uuid(), title: input, completed: false }]);
+        setInput("");
+        // () => { setCount(count+= ) }
+        setCount(() => count++);
+      } else {
+        updateTodo(input, edit.id, edit.completed);
+      }
     } else {
-      console.log("when edit has value");
-      updateTodo(input, edit.id, edit.completed);
+      alert("input task");
     }
   }
 
   const handleOnchange = (e) => {
     setInput(e.target.value);
-    // setInput("");
   };
 
   return (

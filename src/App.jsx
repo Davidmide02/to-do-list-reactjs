@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import React, { useState } from "react";
 import ReactDom from "react-dom";
 import "./App.css";
@@ -10,10 +9,11 @@ function App() {
   const [input, setInput] = useState("");
   const [todo, setTodo] = useState([]);
   const [edit, setEdit] = useState(null);
+  const [count, setCount] = useState(0);
 
   return (
     <div className="App">
-      <Header />
+      <Header count={count} />
       <Form
         input={input}
         setInput={setInput}
@@ -21,6 +21,8 @@ function App() {
         setTodo={setTodo}
         edit={edit}
         setEdit={setEdit}
+        setCount={setCount}
+        count={count}
       />
       <Todolist
         todo={todo}
@@ -28,6 +30,8 @@ function App() {
         setEdit={setEdit}
         edit={edit}
         setInput={setInput}
+        setCount={setCount}
+        count={count}
       />
     </div>
   );
