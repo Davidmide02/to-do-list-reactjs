@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDom from "react-dom";
 import "./App.css";
 import Header from "./Header";
@@ -6,11 +6,19 @@ import Form from "./Form";
 import Todolist from "./todolist";
 
 function App() {
+  const localMemory = JSON.parse(localStorage.getItem("todo")) || [];
+  // fix the above
   const [input, setInput] = useState("");
   const [todo, setTodo] = useState([]);
   const [edit, setEdit] = useState(null);
   const [count, setCount] = useState(0);
 
+  
+  
+  useEffect(()=> {
+    localStorage.getItem("todo", JSON.stringify(todo))
+  },[todo]);
+  
   return (
     <div className="App">
       <Header count={count} />

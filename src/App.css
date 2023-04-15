@@ -116,6 +116,13 @@ form button:hover,
   cursor: pointer;
 }
 
+.complete{
+  color: rgb(222, 213, 213) !important;
+  font-style: italic !important;
+  text-decoration: line-through 5px grey;
+  
+}
+
 /* .todo-container button:hover {
   background-color: ;
 } */

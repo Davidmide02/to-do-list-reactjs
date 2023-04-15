@@ -6,7 +6,7 @@ function Todolist({ todo, setTodo, setEdit, edit, setInput, setCount, count }) {
     setTodo(
       todo.map((item) => {
         if (item.id === task.id) {
-          return { ...todo, completed: !item.completed };
+          return { ...item, completed: !item.completed };
         }
         return item;
       })
@@ -36,6 +36,8 @@ function Todolist({ todo, setTodo, setEdit, edit, setInput, setCount, count }) {
                   onChange={(e) => {
                     e.preventDefault();
                   }}
+                  className={`${task.completed ?"complete":""}`}
+        
                 />
               </li>
 

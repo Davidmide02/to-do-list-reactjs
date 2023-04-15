@@ -16,8 +16,7 @@ function Form({
   // const [input, setInput] = useState("");
 
   const updateTodo = (title, id, completed) => {
-    const newTodo = todo.map((task) =>
-      task.id === id ? { title, id, completed } : task
+    const newTodo = todo.map((task) => task.id === id ? { title, id, completed } : task
     );
     setTodo(newTodo);
     setEdit("");
