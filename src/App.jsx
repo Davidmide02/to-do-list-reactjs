@@ -7,16 +7,15 @@ import Todolist from "./todolist";
 
 function App() {
   const localMemory = JSON.parse(localStorage.getItem("todo")) || [];
-  // fix the above
   const [input, setInput] = useState("");
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState(localMemory);
   const [edit, setEdit] = useState(null);
   const [count, setCount] = useState(0);
 
   
   
   useEffect(()=> {
-    localStorage.getItem("todo", JSON.stringify(todo))
+    localStorage.setItem("todo", JSON.stringify(todo))
   },[todo]);
   
   return (
